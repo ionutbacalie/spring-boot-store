@@ -10,3 +10,7 @@ spring:
   output:
     ansi:
       enabled: ALWAYS
+  jwt:
+    secret: ${JWT_SECRET}
+    accesstokenexpiration: 7200 # 2h
+    refreshTokenExpiration: 604800 # 7d
