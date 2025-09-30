@@ -6,16 +6,24 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-a
-@Entity
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
+@Entity
 @Table(name = "orders")
 public class Order {
     @Id
@@ -39,4 +47,7 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private Set<OrderItem> orders = new LinkedHashSet<>();
 
+    public Set<OrderItem> getItems() {
+        return orders;
+    }
 }
