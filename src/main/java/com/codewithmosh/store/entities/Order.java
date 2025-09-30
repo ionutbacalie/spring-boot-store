@@ -12,6 +12,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -31,7 +33,8 @@ public class Order {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "customer_id")
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
     private User customer;
 
     @Column(name = "status")
