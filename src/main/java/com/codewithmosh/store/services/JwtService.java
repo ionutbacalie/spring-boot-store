@@ -2,17 +2,14 @@ package com.codewithmosh.store.services;
 
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.codewithmosh.store.config.JwtConfig;
-import com.codewithmosh.store.entities.Role;
 import com.codewithmosh.store.entities.User;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -23,9 +20,9 @@ public class JwtService {
     private final JwtConfig jwtConfig;
 
     public Jwt generateAccessToken(User user) {
-        return generateToken(null, jwtConfig.getAccessTokenExpiration());
+        return generateToken(user, jwtConfig.getAccessTokenExpiration());
     }
- 
+
     public Jwt generateRefreshToken(User user) {
         return generateToken(user, jwtConfig.getRefreshTokenExpiration());
     }
