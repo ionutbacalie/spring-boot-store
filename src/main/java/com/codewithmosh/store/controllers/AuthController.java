@@ -1,5 +1,7 @@
 package com.codewithmosh.store.controllers;
 
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.service.annotation.GetExchange;
@@ -50,7 +51,15 @@ public class AuthController {
             )
         );
 
-        var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
+        System.out.println(Map.of("email", request.getEmail(), "password", request.getPassword()));
+
+        var user = userRepository.findByEmail(request.getEmail()).orElse(null);
+
+        System.out.println();
+
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         var accessToken = jwtService.generateAccessToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
@@ -69,6 +78,8 @@ public class AuthController {
     public ResponseEntity<JwtResponse> refresh(
         @CookieValue(value = "refreshToken") String refreshCookie
     ) {
+        System.out.println("Am intrat aici mancamiai pula");
+
         var jwt = jwtService.parseToken(refreshCookie);
 
         if (jwt == null || jwt.isExpired()) {

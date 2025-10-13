@@ -4,14 +4,10 @@ import java.util.Date;
 
 import javax.crypto.SecretKey;
 
-import org.springframework.stereotype.Service;
-
-import com.codewithmosh.store.config.JwtConfig;
 import com.codewithmosh.store.entities.Role;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import lombok.Data;
 
 public class Jwt {
     private final Claims claims;

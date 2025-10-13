@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: store
+  datasource:
+    url: jdbc:mysql://localhost:3306/store_api?createDatabaseIfNotExist=true
+    username: root
+    password: "[*DINamo1994*]"
+  jpa:
+    show-sql: true
+  output:
+    ansi:
+    enabled: ALWAYS
+websiteUrl: http://localhost:4242

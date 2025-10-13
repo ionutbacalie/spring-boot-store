@@ -1,12 +1,6 @@
 spring:
   application:
     name: store
-  datasource:
-    url: jdbc:mysql://localhost:3306/store_api?createDatabaseIfNotExist=true
-    username: root
-    password: "[*DINamo1994*]"
-  jpa:
-    show-sql: true
   output:
     ansi:
       enabled: ALWAYS
@@ -14,3 +8,8 @@ spring:
     secret: ${JWT_SECRET}
     accesstokenexpiration: 7200 # 2h
     refreshTokenExpiration: 604800 # 7d
+  profiles:
+    active: dev
+stripe:
+  secretKey: ${STRIPE_SECRET_KEY}
+  webhookSecretKey: ${STRIPE_WEBHOOK_SECRET_KEY}

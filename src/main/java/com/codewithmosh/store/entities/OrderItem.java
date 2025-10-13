@@ -10,12 +10,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
+@Setter
+@Entity
 @Table(name = "order_items")
 public class OrderItem {
     @Id
@@ -23,7 +27,7 @@ public class OrderItem {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "order_id")
     private Order order;
 
@@ -39,5 +43,13 @@ public class OrderItem {
     
     @Column(name = "total_price", precision = 10, scale = 2)
     private BigDecimal total_price;
+
+    public OrderItem(Order order, Product product,Integer quantity) {
+        this.order = order;
+        this.product = product;
+        this.quantity = quantity;
+        this.unit_price = product.getPrice();
+        this.total_price = unit_price.multiply(BigDecimal.valueOf(quantity));
+    }
 
 }
