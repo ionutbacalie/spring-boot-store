@@ -9,5 +9,5 @@ spring:
     show-sql: true
   output:
     ansi:
-    enabled: ALWAYS
+      enabled: ALWAYS
 websiteUrl: http://localhost:4242

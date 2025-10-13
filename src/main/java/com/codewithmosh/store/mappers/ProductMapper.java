@@ -5,9 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 import com.codewithmosh.store.dtos.ProductDto;
-import com.codewithmosh.store.dtos.UpdateUserRequest;
 import com.codewithmosh.store.entities.Product;
-import com.codewithmosh.store.entities.User;
 
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
@@ -18,4 +16,4 @@ public interface ProductMapper {
 
     @Mapping(target = "id", ignore = true)
     void update(ProductDto request,@MappingTarget Product product);
-}
+} 
