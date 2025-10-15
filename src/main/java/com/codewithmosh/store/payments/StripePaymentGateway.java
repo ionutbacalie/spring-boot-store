@@ -19,6 +19,7 @@ import com.stripe.param.checkout.SessionCreateParams;
 import com.stripe.param.checkout.SessionCreateParams.LineItem;
 import com.stripe.param.checkout.SessionCreateParams.LineItem.PriceData;
 import com.stripe.param.checkout.SessionCreateParams.LineItem.PriceData.ProductData;
+import com.stripe.param.checkout.SessionCreateParams.PaymentIntentData;
 
 @Service
 public class StripePaymentGateway implements PaymentGateway {
@@ -36,7 +37,7 @@ public class StripePaymentGateway implements PaymentGateway {
                 .setMode(SessionCreateParams.Mode.PAYMENT)
                 .setSuccessUrl(websiteUrl + "/checkout-success?orderId=" + order.getId())
                 .setCancelUrl(websiteUrl + "/checkout-cancel")
-                .putMetadata("order_id", order.getId().toString());
+                .setPaymentIntentData(createPaymentIntentData(order));
 
             order.getItems().forEach(item -> {
                 var lineItem = createLineItem(item);
@@ -51,6 +52,12 @@ public class StripePaymentGateway implements PaymentGateway {
             System.out.println(ex.getMessage());
             throw new PaymentException();
         }
+    }
+
+    private PaymentIntentData createPaymentIntentData(Order order) {
+        return SessionCreateParams.PaymentIntentData.builder()
+            .putMetadata("order_id", String.valueOf(order.getId()))
+            .build();
     }
 
     private LineItem createLineItem(OrderItem item) {
