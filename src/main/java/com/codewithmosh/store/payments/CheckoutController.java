@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.codewithmosh.store.dtos.ErrorDto;
-import com.codewithmosh.store.exceptions.CartNotFoundException;
-import com.codewithmosh.store.exceptions.EmptyCartException;
-import com.codewithmosh.store.repositories.OrderRepository;
+import com.codewithmosh.store.carts.CartNotFoundException;
+import com.codewithmosh.store.carts.EmptyCartException;
+import com.codewithmosh.store.common.ErrorDto;
+import com.codewithmosh.store.orders.OrderRepository;
 
 import jakarta.validation.Valid;
 import lombok.Data;
